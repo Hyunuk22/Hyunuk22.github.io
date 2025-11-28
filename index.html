@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name - Portfolio</title>
+    <style>
+        /* --- 기본 설정 --- */
+        :root {
+            --primary-color: #2563eb; /* 신뢰감을 주는 블루 */
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f3f4f6;
+            --white: #ffffff;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- 레이아웃 유틸리티 --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        section { padding: 80px 0; }
+        
+        /* --- 헤더 (네비게이션) --- */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+        .logo { font-weight: bold; font-size: 1.2rem; color: var(--primary-color); }
+        .nav-links a { margin-left: 20px; font-size: 0.9rem; color: var(--text-light); }
+        .nav-links a:hover { color: var(--primary-color); }
+
+        /* --- 히어로 섹션 (메인 화면) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 30px; }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .btn:hover { background-color: #1d4ed8; }
+
+        /* --- About 섹션 --- */
+        .section-title { font-size: 2rem; text-align: center; margin-bottom: 40px; }
+        .about-content { text-align: center; max-width: 700px; margin: 0 auto; color: var(--text-light); }
+
+        /* --- Skills 섹션 --- */
+        .skills { background-color: var(--bg-light); }
+        .skills-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .skill-tag {
+            background: var(--white);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        /* --- Projects 섹션 --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+        }
+        .project-card:hover { transform: translateY(-5px); }
+        .card-body { padding: 20px; }
+        .card-body h3 { margin-bottom: 10px; font-size: 1.2rem; }
+        .card-body p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 15px; }
+        .card-link { font-size: 0.9rem; color: var(--primary-color); font-weight: bold; }
+
+        /* --- Contact 섹션 --- */
+        .contact { background-color: var(--text-dark); color: var(--white); text-align: center; }
+        .contact p { margin-bottom: 20px; color: #9ca3af; }
+        .contact .btn { background-color: var(--white); color: var(--text-dark); }
+        .contact .btn:hover { background-color: #e5e7eb; }
+
+        /* --- Footer --- */
+        footer { text-align: center; padding: 20px; font-size: 0.8rem; color: var(--text-light); border-top: 1px solid #eee; }
+
+        /* --- 모바일 대응 --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; } /* 심플함을 위해 모바일에선 메뉴 숨김 (필요시 추가 가능) */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Hong.Gildong</a>
+                <div class="nav-links">
+                    <a href="#about">소개</a>
+                    <a href="#skills">기술</a>
+                    <a href="#projects">프로젝트</a>
+                    <a href="#contact">문의</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>안녕하세요, <br>개발자 홍길동입니다.</h1>
+            <p>문제를 해결하고 가치를 만드는 웹 개발자입니다.</p>
+            <a href="#projects" class="btn">프로젝트 보기</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>
+                    새로운 기술을 배우는 것을 좋아하며, 사용자 경험(UX)을 중요하게 생각합니다.
+                    <br>효율적인 코드 작성과 협업에 능숙하며, 꾸준히 성장하는 개발자가 되는 것이 목표입니다.
+                    <br>현재는 GitHub Pages를 활용한 정적 웹사이트 구축에 관심이 많습니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <span class="skill-tag">HTML/CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Git & GitHub</span>
+                <span class="skill-tag">Data Analysis</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-grid">
+                
+                <div class="project-card">
+                    <div class="card-body">
+                        <h3>개인 포트폴리오 웹사이트</h3>
+                        <p>GitHub Pages를 이용하여 배포한 반응형 개인 웹사이트입니다. HTML과 CSS만으로 깔끔하게 구현하였습니다.</p>
+                        <a href="#" class="card-link">자세히 보기 &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-body">
+                        <h3>데이터 분석 대시보드</h3>
+                        <p>Python과 Streamlit을 활용하여 데이터를 시각화한 대시보드 프로젝트입니다.</p>
+                        <a href="#" class="card-link">자세히 보기 &rarr;</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-body">
+                        <h3>투두 리스트 앱</h3>
+                        <p>JavaScript 로컬 스토리지를 활용한 할 일 관리 애플리케이션입니다.</p>
+                        <a href="#" class="card-link">자세히 보기 &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" style="color:white;">Contact Me</h2>
+            <p>함께 일할 기회나 궁금한 점이 있으시다면 언제든 연락주세요.</p>
+            <a href="mailto:your-email@example.com" class="btn">이메일 보내기</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Hong Gildong. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
