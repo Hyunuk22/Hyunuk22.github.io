@@ -8,7 +8,7 @@
     <style>
         /* --- 기본 설정 --- */
         :root {
-            --primary-color: #C80150; /* POSTECH 메인 컬러 (Red/Pink 계열) 혹은 개인 선호색으로 변경 가능 */
+            --primary-color: #C80150; /* POSTECH 색상 */
             --text-dark: #111111;
             --text-gray: #555555;
             --bg-light: #f9fafb;
@@ -22,15 +22,10 @@
             color: var(--text-dark);
         }
         a { text-decoration: none; color: inherit; transition: 0.2s; }
-        ul { list-style: none; }
-
+        
         /* --- 레이아웃 유틸리티 --- */
-        .container {
-            max-width: 900px; /* 학술 사이트는 폭이 너무 넓지 않은 게 읽기 좋습니다 */
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        section { padding: 60px 0; border-bottom: 1px solid var(--border-color); }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 80px 0; border-bottom: 1px solid var(--border-color); }
         section:last-of-type { border-bottom: none; }
         
         /* --- 헤더 --- */
@@ -42,100 +37,88 @@
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
         }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 64px;
-        }
-        .logo { font-weight: 700; font-size: 1.1rem; color: var(--text-dark); }
+        nav { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .logo { font-weight: 700; font-size: 1.1rem; }
         .nav-links a { margin-left: 24px; font-size: 0.95rem; color: var(--text-gray); font-weight: 500; }
         .nav-links a:hover { color: var(--primary-color); }
 
         /* --- 히어로 섹션 --- */
-        .hero {
-            padding: 100px 0;
-            text-align: left;
-        }
+        .hero { padding: 100px 0; }
         .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; }
-        .hero p { font-size: 1.25rem; color: var(--text-gray); font-weight: 400; }
+        .hero p { font-size: 1.25rem; color: var(--text-gray); }
 
-        /* --- 섹션 공통 타이틀 --- */
+        /* --- 섹션 타이틀 --- */
         .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 32px;
-            color: var(--text-dark);
-            display: inline-block;
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 5px;
+            font-size: 1.8rem; font-weight: 700; margin-bottom: 40px;
+            border-bottom: 3px solid var(--primary-color); display: inline-block; padding-bottom: 5px;
         }
 
         /* --- About Me --- */
-        .about-text { font-size: 1.05rem; color: #333; word-break: keep-all; }
+        .about-text p { margin-bottom: 20px; font-size: 1.05rem; word-break: keep-all; }
+        .research-highlight {
+            background-color: var(--bg-light);
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .research-highlight strong { color: var(--primary-color); }
 
-        /* --- Education (약력) --- */
-        .edu-item {
-            display: flex;
-            margin-bottom: 24px;
-        }
-        .edu-year {
-            width: 140px;
-            font-weight: 600;
-            color: var(--primary-color);
-            flex-shrink: 0;
-        }
+        /* --- Education --- */
+        .edu-item { display: flex; margin-bottom: 24px; }
+        .edu-year { width: 140px; font-weight: 600; color: var(--primary-color); flex-shrink: 0; }
         .edu-detail h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
         .edu-detail p { font-size: 0.95rem; color: var(--text-gray); }
 
-        /* --- Publications (논문) --- */
-        .pub-category {
-            margin-bottom: 30px;
-        }
-        .pub-category h3 {
-            font-size: 1.2rem;
-            margin-bottom: 16px;
-            color: var(--text-dark);
+        /* --- Publications (이미지 포함 레이아웃) --- */
+        .pub-category { margin-bottom: 50px; }
+        .pub-category h3 { font-size: 1.3rem; margin-bottom: 24px; padding-left: 10px; border-left: 4px solid var(--primary-color); }
+        
+        /* 이미지가 있는 논문 레이아웃 */
+        .pub-wrapper {
             display: flex;
-            align-items: center;
+            gap: 24px;
+            margin-bottom: 30px;
+            align-items: flex-start;
         }
-        .pub-category h3::before {
-            content: '';
-            display: block;
-            width: 6px;
-            height: 24px;
-            background-color: var(--primary-color);
-            margin-right: 10px;
-            border-radius: 2px;
+        .pub-img-box {
+            flex: 0 0 280px; /* 이미지 영역 너비 고정 */
         }
-        .pub-item { margin-bottom: 20px; padding-left: 16px; }
-        .pub-title { font-weight: 700; display: block; margin-bottom: 4px; color: #000; }
-        .pub-authors { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 2px; }
-        .pub-venue { color: var(--primary-color); font-weight: 500; font-size: 0.95rem; font-style: italic;}
-        .me { text-decoration: underline; font-weight: 600; color: #000; } /* 본인 이름 강조 */
+        .pub-img-box img {
+            width: 100%;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .pub-content { flex: 1; }
+        
+        .pub-title { font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 8px; line-height: 1.4; }
+        .pub-authors { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 4px; display: block;}
+        .pub-venue { color: var(--primary-color); font-weight: 500; font-size: 0.95rem; font-style: italic; display: block; margin-bottom: 8px;}
+        .me { text-decoration: underline; font-weight: 600; color: #000; }
+        .tag { 
+            display: inline-block; font-size: 0.75rem; padding: 2px 8px; 
+            border-radius: 4px; background: #eee; color: #555; font-weight: 600; vertical-align: middle; margin-left: 6px;
+        }
 
         /* --- Contact --- */
         .contact { background-color: var(--bg-light); text-align: center; }
         .contact a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 24px;
-            background-color: var(--text-dark);
-            color: white;
-            border-radius: 4px;
-            font-weight: 600;
+            display: inline-block; margin-top: 10px; padding: 12px 30px;
+            background-color: var(--text-dark); color: white; border-radius: 4px; font-weight: 600;
         }
-        .contact a:hover { background-color: var(--primary-color); }
 
         /* --- Footer --- */
         footer { text-align: center; padding: 40px 0; font-size: 0.85rem; color: #888; border-top: 1px solid var(--border-color); }
 
-        /* --- 모바일 --- */
+        /* --- 모바일 대응 --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             .edu-item { flex-direction: column; }
             .edu-year { margin-bottom: 4px; }
-            .nav-links { display: none; } /* 모바일 간소화 */
+            .pub-wrapper { flex-direction: column; } /* 모바일에서 이미지 위로 */
+            .pub-img-box { flex: none; width: 100%; max-width: 400px; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
@@ -159,9 +142,7 @@
         <div class="container">
             <h1>안녕하세요,<br>김현욱입니다.</h1>
             <p>Haptics & Perception Researcher</p>
-            <p style="font-size: 1rem; margin-top: 10px; color: #666;">
-                POSTECH Interaction Lab
-            </p>
+            <p style="font-size: 1rem; margin-top: 10px; color: #666;">POSTECH Interaction Lab</p>
         </div>
     </section>
 
@@ -170,10 +151,18 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-text">
                 <p>
-                    안녕하세요. 저는 포항공과대학교(POSTECH) <strong>인터랙션 연구실(Interaction Lab)</strong>의 석사 과정 학생입니다.<br><br>
-                    저는 실시간 오디오 신호를 햅틱 신호로 변환하는 시스템(Audio-to-Haptic)에 깊은 관심을 가지고 연구하고 있습니다. 
-                    최근에는 소리의 공간적 위치를 기반으로 시각과 햅틱 자극 간의 상호작용 및 관계를 탐구하는 인지 연구(Perception Research)로 관심 분야를 확장하고 있습니다.
+                    안녕하세요. 저는 포항공과대학교(POSTECH) <strong>인터랙션 연구실(Interaction Lab)</strong>의 석사 과정 학생입니다.
+                    실시간 오디오 신호를 햅틱 신호로 변환하는 시스템(Audio-to-Haptic)과 인간의 인지 능력(Perception)에 깊은 관심을 가지고 연구하고 있습니다.
                 </p>
+                
+                <div class="research-highlight">
+                    <p>
+                        <strong>[Current Research]</strong><br>
+                        현재 석사 과정에서는 <strong>소리와 진동의 다중 감각 통합(Multisensory Integration)</strong>을 활용하여, 
+                        사용자의 신체를 관통하는 듯한 <strong>팬텀 감각(Body-Penetrating Phantom Sensations)을 증강</strong>시키는 연구를 수행하고 있습니다.
+                        단순한 표면 진동을 넘어, 시청각 정보와 촉각의 결합이 공간 인지에 미치는 영향을 탐구합니다.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -181,7 +170,6 @@
     <section id="education">
         <div class="container">
             <h2 class="section-title">Education</h2>
-            
             <div class="edu-item">
                 <div class="edu-year">2026 ~ (예정)</div>
                 <div class="edu-detail">
@@ -189,7 +177,6 @@
                     <p>컴퓨터공학과 박사 과정</p>
                 </div>
             </div>
-
             <div class="edu-item">
                 <div class="edu-year">2024 ~ 2025</div>
                 <div class="edu-detail">
@@ -197,7 +184,6 @@
                     <p>컴퓨터공학과 석사 과정</p>
                 </div>
             </div>
-
             <div class="edu-item">
                 <div class="edu-year">2018 ~ 2023</div>
                 <div class="edu-detail">
@@ -214,30 +200,43 @@
 
             <div class="pub-category">
                 <h3>International Conference</h3>
-                <div class="pub-item">
-                    <span class="pub-title">Enhancing Body-Penetrating Phantom Sensations Through Multisensory Integration of Sound and Vibration</span>
-                    <span class="pub-authors"><span class="me">Hyunuk Kim</span>, Dajin Lee, and Seungmoon Choi</span>
-                    <span class="pub-venue">Proceedings of the IEEE World Haptics Conference, 2025. (Oral Presentation)</span>
+                
+                <div class="pub-wrapper">
+                    <div class="pub-img-box">
+                        <img src="https://placehold.co/600x400/e5e7eb/a3a3a3?text=Teaser+Image" alt="Teaser Image">
+                    </div>
+                    <div class="pub-content">
+                        <span class="pub-title">Enhancing Body-Penetrating Phantom Sensations Through Multisensory Integration of Sound and Vibration</span>
+                        <span class="pub-authors"><span class="me">Hyunuk Kim</span>, Dajin Lee, and Seungmoon Choi</span>
+                        <span class="pub-venue">Proceedings of the IEEE World Haptics Conference, 2025.</span>
+                        <span class="tag">Oral Presentation</span>
+                        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                            제안하는 시스템은 소리와 진동의 동기화를 통해 사용자가 신체 내부를 통과하는 듯한 환영 감각을 경험하게 합니다. 
+                            (여기에 논문에 대한 간단한 한 줄 요약을 추가할 수 있습니다.)
+                        </p>
+                    </div>
                 </div>
+
             </div>
 
             <div class="pub-category">
                 <h3>Demonstrations</h3>
-                <div class="pub-item">
-                    <span class="pub-title">Body-Penetrating Tactile Phantom Sensations Enhanced by Sound</span>
-                    <span class="pub-authors"><span class="me">Hyunuk Kim</span>, Dajin Lee, and Seungmoon Choi</span>
-                    <span class="pub-venue">Proceedings of the IEEE World Haptics Conference, pp. 870, July 8-11, 2025.</span>
+                <div class="pub-wrapper"> <div class="pub-content">
+                        <span class="pub-title">Body-Penetrating Tactile Phantom Sensations Enhanced by Sound</span>
+                        <span class="pub-authors"><span class="me">Hyunuk Kim</span>, Dajin Lee, and Seungmoon Choi</span>
+                        <span class="pub-venue">Proceedings of the IEEE World Haptics Conference, pp. 870, July 8-11, 2025.</span>
+                        <span class="tag">Hands-on Demo</span>
+                    </div>
                 </div>
             </div>
 
             <div class="pub-category">
                 <h3>Domestic Conference</h3>
-                <div class="pub-item">
-                    <span class="pub-title">가상현실 일인칭 슈팅 게임을 위한 실시간 의미론적 소리 기반 전신 헵틱 효과 생성</span>
-                    <span class="pub-authors">윤겨레, <span class="me">김현욱</span>, 최승문</span>
-                    <span class="pub-venue">한국 햅틱스 학술대회 (Korea Haptics Conference), August 19-21, 2024.</span>
-                    <div style="font-size: 0.85rem; color: #888; margin-top: 4px;">
-                        (Eng) Generating Real-Time, Semantic, Sound-based, Full-Body Haptic Effects for Virtual Reality First-Person Shooter Games
+                <div class="pub-wrapper">
+                    <div class="pub-content">
+                        <span class="pub-title">가상현실 일인칭 슈팅 게임을 위한 실시간 의미론적 소리 기반 전신 헵틱 효과 생성</span>
+                        <span class="pub-authors">윤겨레, <span class="me">김현욱</span>, 최승문</span>
+                        <span class="pub-venue">한국 햅틱스 학술대회 (Korea Haptics Conference), August 19-21, 2024.</span>
                     </div>
                 </div>
             </div>
