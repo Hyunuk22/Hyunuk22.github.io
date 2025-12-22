@@ -115,6 +115,35 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         .pub-content { flex: 1; }
+
+        /* --- [NEW] 가로가 긴 이미지를 위한 강조 레이아웃 추가 --- */
+        .pub-wrapper.wide-layout {
+            display: block; /* 옆으로 나열하지 않고 아래로 쌓음 */
+        }
+
+        .pub-wrapper.wide-layout .pub-img-box {
+            width: 100%; /* 컨테이너 가로폭 전체 사용 */
+            flex: none; /* 기존 고정폭(280px) 설정 해제 */
+            margin-bottom: 20px; /* 텍스트와의 간격 */
+            background: #fafafa; /* 이미지가 돋보이도록 은은한 배경색 추가 (선택사항) */
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .pub-wrapper.wide-layout .pub-img-box img {
+             /* 가로로 긴 이미지가 너무 높이를 많이 차지하지 않도록 최대 높이 제한 (필요시 조절) */
+             max-height: 400px; 
+             object-fit: contain; /* 비율 유지하며 프레임 안에 맞춤 */
+             box-shadow: none; /* 기존 그림자 제거하고 flat하게 */
+             border: none;
+        }
+        
+        /* wide-layout일 때 타이틀 크기 약간 키우기 */
+        .pub-wrapper.wide-layout .pub-title {
+             font-size: 1.25rem;
+             margin-bottom: 12px;
+        }
+        /* ---------------------------------------------------- */
         
         .pub-title { font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 8px; line-height: 1.4; }
         .pub-authors { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 4px; display: block;}
@@ -245,7 +274,7 @@
 
             <div class="pub-category">
                 <h3>Thesis</h3>
-                <div class="pub-wrapper">
+                <div class="pub-wrapper wide-layout">
                     <div class="pub-img-box">
                          <img src="IMG/Teaser.png" alt="Thesis Figure">
                     </div>
