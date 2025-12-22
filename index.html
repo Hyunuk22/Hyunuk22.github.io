@@ -6,23 +6,60 @@
     <title>김현욱 - Portfolio</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
     <style>
-        /* --- 기본 설정 --- */
+        /* --- 1. 색상 변수 정의 (Light/Dark Mode) --- */
         :root {
-            --primary-color: #C80150; /* POSTECH 색상 */
-            --text-dark: #111111;
-            --text-gray: #555555;
-            --bg-light: #f9fafb;
+            /* 공통 컬러 */
+            --primary-color: #C80150; /* POSTECH Main Color */
             --white: #ffffff;
+            
+            /* Light Mode (기본) */
+            --bg-body: #ffffff;
+            --bg-section: #f9fafb;
+            --bg-card: #ffffff;         /* 카드/이미지 배경 */
+            --text-main: #111111;
+            --text-sub: #555555;
+            --text-gray: #666666;       /* 연한 설명 텍스트 */
             --border-color: #e5e7eb;
+            --shadow-color: rgba(0,0,0,0.08);
+            --highlight-bg: #f9fafb;    /* About Me 강조 박스 배경 */
         }
+
+        /* Dark Mode 오버라이드 */
+        body.dark-mode {
+            --bg-body: #121212;
+            --bg-section: #1e1e1e;
+            --bg-card: #2c2c2c;
+            --text-main: #f1f1f1;
+            --text-sub: #a0a0a0;
+            --text-gray: #bbbbbb;
+            --border-color: #444444;
+            --shadow-color: rgba(0,0,0,0.5);
+            --highlight-bg: #252525;
+            --white: #2c2c2c; /* 프로필 테두리 색상 등을 위해 조정 */
+        }
+
+        /* --- 기본 설정 --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
             font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             line-height: 1.7;
-            color: var(--text-dark);
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            transition: background-color 0.3s ease, color 0.3s ease; /* 다크모드 전환 애니메이션 */
         }
+        
         a { text-decoration: none; color: inherit; transition: 0.2s; }
         
+        /* 다크모드 시 텍스트 가독성 보정 */
+        body.dark-mode .hero p, 
+        body.dark-mode .edu-detail p, 
+        body.dark-mode .pub-authors, 
+        body.dark-mode .pub-content p { 
+            color: var(--text-sub) !important; 
+        }
+        body.dark-mode .research-highlight h3 { color: var(--text-main) !important; }
+
         /* --- 레이아웃 유틸리티 --- */
         .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
         section { padding: 80px 0; border-bottom: 1px solid var(--border-color); }
@@ -36,60 +73,83 @@
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
+            transition: background 0.3s ease;
         }
+        /* 헤더 다크모드 배경 */
+        body.dark-mode header {
+            background: rgba(18, 18, 18, 0.9);
+        }
+
         nav { display: flex; justify-content: space-between; align-items: center; height: 64px; }
         .logo { font-weight: 700; font-size: 1.1rem; }
-        .nav-links a { margin-left: 24px; font-size: 0.95rem; color: var(--text-gray); font-weight: 500; }
+        .nav-links a { margin-left: 24px; font-size: 0.95rem; color: var(--text-sub); font-weight: 500; }
         .nav-links a:hover { color: var(--primary-color); }
 
-        /* --- 히어로 섹션 (수정됨) --- */
+        /* --- [NEW] 테마 토글 버튼 스타일 --- */
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            margin-left: 20px;
+            transition: all 0.3s ease;
+            color: var(--text-main);
+            padding: 0;
+        }
+        .theme-toggle:hover {
+            border-color: var(--primary-color);
+            transform: rotate(15deg);
+        }
+
+        /* --- 히어로 섹션 --- */
         .hero { padding: 100px 0; }
-        /* Flexbox로 텍스트와 이미지를 나란히 배치 */
         .hero .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 40px;
         }
-        .hero-text {
-            flex: 1; /* 남은 공간 차지 */
-        }
+        .hero-text { flex: 1; }
         .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px; line-height: 1.2; }
-        .hero p { font-size: 1.25rem; color: var(--text-gray); }
-        .hero-affiliation { font-size: 1rem; margin-top: 10px; color: #666; }
+        .hero p { font-size: 1.25rem; color: var(--text-sub); }
+        .hero-affiliation { font-size: 1rem; margin-top: 10px; color: var(--text-gray); }
         
-        /* 프로필 이미지 스타일 */
+        /* --- 프로필 이미지 (산타 모자 포함) --- */
         .hero-image {
-            flex: 0 0 auto; /* 크기 고정 */
-            position: relative; /* 산타 모자 배치를 위해 필수 */
+            flex: 0 0 auto;
+            position: relative; 
         }
-
-        /* 산타 모자 이모지 추가 (::after 가상 요소 사용) */
+        /* 산타 모자 */
         .hero-image::after {
-            content: "🎅";  /* 산타 이모지 */
+            content: "🎅";
             position: absolute;
-            top: -20px;     /* 위치 조절 (위) */
-            left: -10px;    /* 위치 조절 (왼쪽) */
-            font-size: 4rem; /* 모자 크기 */
-            transform: rotate(-15deg); /* 살짝 기울이기 */
+            top: -20px;
+            left: -10px;
+            font-size: 4rem;
+            transform: rotate(-15deg);
             z-index: 10;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); /* 모자 그림자 */
-            animation: bounce 2s infinite ease-in-out; /* 둥실둥실 움직임 */
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+            animation: bounce 2s infinite ease-in-out;
+            pointer-events: none; /* 클릭 방해 방지 */
         }
-
-        /* 모자가 둥실거리는 애니메이션 정의 */
         @keyframes bounce {
             0%, 100% { transform: rotate(-15deg) translateY(0); }
             50% { transform: rotate(-15deg) translateY(-10px); }
         }
         
         .hero-image img {
-            width: 240px;  /* 이미지 크기 조절 */
+            width: 240px;
             height: 240px;
-            object-fit: cover; /* 이미지가 찌그러지지 않게 */
-            border-radius: 50%; /* 완벽한 원형 */
-            border: 4px solid var(--white); /* 흰색 테두리 */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); /* 부드러운 그림자 */
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--bg-body); /* 다크모드 시 배경색과 맞춰 자연스럽게 */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         /* --- 섹션 타이틀 --- */
@@ -101,11 +161,12 @@
         /* --- About Me --- */
         .about-text p { margin-bottom: 20px; font-size: 1.05rem; word-break: keep-all; }
         .research-highlight {
-            background-color: var(--bg-light);
+            background-color: var(--highlight-bg); /* 변수 적용 */
             padding: 20px;
             border-left: 4px solid var(--primary-color);
             border-radius: 4px;
             margin-top: 20px;
+            transition: background-color 0.3s ease;
         }
         .research-highlight strong { color: var(--primary-color); }
 
@@ -113,13 +174,12 @@
         .edu-item { display: flex; margin-bottom: 24px; }
         .edu-year { width: 140px; font-weight: 600; color: var(--primary-color); flex-shrink: 0; }
         .edu-detail h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
-        .edu-detail p { font-size: 0.95rem; color: var(--text-gray); }
+        .edu-detail p { font-size: 0.95rem; color: var(--text-sub); }
 
-        /* --- Publications (이미지 포함 레이아웃) --- */
+        /* --- Publications --- */
         .pub-category { margin-bottom: 50px; }
         .pub-category h3 { font-size: 1.3rem; margin-bottom: 24px; padding-left: 10px; border-left: 4px solid var(--primary-color); }
         
-        /* 이미지가 있는 논문 레이아웃 */
         .pub-wrapper {
             display: flex;
             gap: 24px;
@@ -127,59 +187,50 @@
             align-items: flex-start;
         }
         .pub-img-box {
-            flex: 0 0 280px; /* 이미지 영역 너비 고정 */
+            flex: 0 0 280px;
+            background: var(--bg-card); /* 다크모드 대응 */
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            overflow: hidden; /* 이미지 둥글게 처리 */
         }
         .pub-img-box img {
             width: 100%;
-            border-radius: 6px;
-            border: 1px solid #eee;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: block; /* 이미지 하단 공백 제거 */
         }
         .pub-content { flex: 1; }
 
-        /* --- [NEW] 가로가 긴 이미지를 위한 강조 레이아웃 추가 --- */
-        .pub-wrapper.wide-layout {
-            display: block; /* 옆으로 나열하지 않고 아래로 쌓음 */
-        }
-
+        /* [Wide Layout] 가로 긴 이미지용 */
+        .pub-wrapper.wide-layout { display: block; }
         .pub-wrapper.wide-layout .pub-img-box {
-            width: 100%; /* 컨테이너 가로폭 전체 사용 */
-            flex: none; /* 기존 고정폭(280px) 설정 해제 */
-            margin-bottom: 20px; /* 텍스트와의 간격 */
-            background: #fafafa; /* 이미지가 돋보이도록 은은한 배경색 추가 (선택사항) */
+            width: 100%;
+            flex: none;
+            margin-bottom: 20px;
             padding: 10px;
+            background: var(--highlight-bg); /* 배경색 은은하게 */
             border-radius: 8px;
         }
-        
         .pub-wrapper.wide-layout .pub-img-box img {
-             /* 가로로 긴 이미지가 너무 높이를 많이 차지하지 않도록 최대 높이 제한 (필요시 조절) */
              max-height: 400px; 
-             object-fit: contain; /* 비율 유지하며 프레임 안에 맞춤 */
-             box-shadow: none; /* 기존 그림자 제거하고 flat하게 */
-             border: none;
+             object-fit: contain;
+             margin: 0 auto;
         }
+        .pub-wrapper.wide-layout .pub-title { font-size: 1.25rem; margin-bottom: 12px; }
         
-        /* wide-layout일 때 타이틀 크기 약간 키우기 */
-        .pub-wrapper.wide-layout .pub-title {
-             font-size: 1.25rem;
-             margin-bottom: 12px;
-        }
-        /* ---------------------------------------------------- */
-        
+        /* 텍스트 스타일 */
         .pub-title { font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 8px; line-height: 1.4; }
-        .pub-authors { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 4px; display: block;}
+        .pub-authors { color: var(--text-sub); font-size: 0.95rem; margin-bottom: 4px; display: block;}
         .pub-venue { color: var(--primary-color); font-weight: 500; font-size: 0.95rem; font-style: italic; display: block; margin-bottom: 8px;}
-        .me { text-decoration: underline; font-weight: 600; color: #000; }
+        .me { text-decoration: underline; font-weight: 600; color: var(--text-main); }
         .tag { 
             display: inline-block; font-size: 0.75rem; padding: 2px 8px; 
-            border-radius: 4px; background: #eee; color: #555; font-weight: 600; vertical-align: middle; margin-left: 6px;
+            border-radius: 4px; background: var(--border-color); color: var(--text-sub); font-weight: 600; vertical-align: middle; margin-left: 6px;
         }
 
         /* --- Contact --- */
-        .contact { background-color: var(--bg-light); text-align: center; }
+        .contact { background-color: var(--bg-section); text-align: center; transition: background-color 0.3s ease; }
         .contact a {
             display: inline-block; margin-top: 10px; padding: 12px 30px;
-            background-color: var(--text-dark); color: white; border-radius: 4px; font-weight: 600;
+            background-color: var(--text-main); color: var(--bg-body); border-radius: 4px; font-weight: 600;
         }
 
         /* --- Footer --- */
@@ -187,23 +238,17 @@
 
         /* --- 모바일 대응 --- */
         @media (max-width: 768px) {
-            /* 히어로 섹션 모바일 레이아웃 */
-            .hero .container {
-                flex-direction: column-reverse; /* 텍스트가 위, 이미지가 아래로 오도록 */
-                text-align: center;
-                gap: 30px;
-            }
-            .hero-image img {
-                width: 200px; /* 모바일에서 이미지 크기 줄임 */
-                height: 200px;
-            }
+            .hero .container { flex-direction: column-reverse; text-align: center; gap: 30px; }
+            .hero-image img { width: 200px; height: 200px; }
             .hero h1 { font-size: 2rem; }
-            
             .edu-item { flex-direction: column; }
             .edu-year { margin-bottom: 4px; }
-            .pub-wrapper { flex-direction: column; } /* 모바일에서 이미지 위로 */
+            .pub-wrapper { flex-direction: column; }
             .pub-img-box { flex: none; width: 100%; max-width: 400px; }
-            .nav-links { display: none; }
+            
+            /* 모바일에서 네비게이션 간소화 (토글 버튼 위치 조정) */
+            .nav-links a { display: none; }
+            .nav-links { display: flex !important; }
         }
     </style>
 </head>
@@ -213,11 +258,15 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">Hyunuk Kim</a>
-                <div class="nav-links">
+                <div class="nav-links" style="display: flex; align-items: center;"> 
                     <a href="#about">About</a>
                     <a href="#education">Education</a>
                     <a href="#publications">Publications</a>
                     <a href="#contact">Contact</a>
+                    
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+                        ☀️
+                    </button>
                 </div>
             </nav>
         </div>
@@ -250,14 +299,13 @@
                     <p style="margin-bottom: 10px;">
                         <strong>"Generating Gaze-Adaptive Semantic Cinematic Haptic Effects"</strong>
                     </p>
-                    <p style="font-size: 0.95rem; color: #555;">
+                    <p style="font-size: 0.95rem; color: var(--text-sub);">
                         석사 학위 연구로 <strong>시선 추적 기반의 적응형 햅틱 시네마틱 시스템</strong>을 개발했습니다. 
                         딥러닝 기반의 <strong>의미론적 오디오 분석(PANNs)</strong>을 통해 영화 속 소리(총격, 폭발, 차량 등)를 식별하고, 
                         웹캠으로 사용자의 <strong>시선(Gaze)</strong>을 실시간 추적하여, 사용자가 <strong>주목하는 화면 위치에 맞춰 공간적인 햅틱 피드백</strong>을 생성하는 프레임워크입니다.
                         
                     </p>
                 </div>
-                </p>
             </div>
         </div>
     </section>
@@ -304,7 +352,7 @@
                         <span class="pub-authors"><span class="me">Hyunuk Kim</span> and Seungmoon Choi (Advisor)</span>
                         <span class="pub-venue">Master's Thesis, Pohang University of Science and Technology (POSTECH), 2026.</span>
                         <span class="tag" style="background-color: #ffe4e6; color: #be123c;">M.S. Thesis</span>
-                        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 10px;">
                             시선 추적과 오디오 분석을 결합하여, 사용자가 바라보는 화면 위치에 맞춰 햅틱 피드백을 적응적으로 생성하는 시스템을 제안하였습니다. 
                             기존 전역 햅틱 방식 대비 표현력과 몰입감을 유의미하게 향상시켰습니다.
                         </p>
@@ -324,7 +372,7 @@
                         <span class="pub-authors"><span class="me">Hyunuk Kim</span>, Dajin Lee, and Seungmoon Choi</span>
                         <span class="pub-venue">Proceedings of the IEEE World Haptics Conference, 2025.</span>
                         <span class="tag">Oral Presentation</span>
-                        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                        <p style="font-size: 0.9rem; color: var(--text-gray); margin-top: 10px;">
                             소리와 진동의 동기화를 통해 신체 내부를 관통하는 듯한 팬텀 감각을 생성하는 멀티모달 햅틱 인터페이스를 제안합니다.
                         </p>
                     </div>
@@ -347,7 +395,7 @@
                         <span class="pub-title">가상현실 일인칭 슈팅 게임을 위한 실시간 의미론적 소리 기반 전신 헵틱 효과 생성</span>
                         <span class="pub-authors">윤겨레, <span class="me">김현욱</span>, 최승문</span>
                         <span class="pub-venue">한국 햅틱스 학술대회 (Korea Haptics Conference), August 19-21, 2024.</span>
-                        <div style="font-size: 0.85rem; color: #888; margin-top: 4px;">
+                        <div style="font-size: 0.85rem; color: var(--text-gray); margin-top: 4px;">
                             (Eng) Generating Real-Time, Semantic, Sound-based, Full-Body Haptic Effects for Virtual Reality First-Person Shooter Games
                         </div>
                     </div>
@@ -361,7 +409,7 @@
                         <span class="pub-title">APACHE5 NPU SoC 환경에서의 딥러닝 기반 도로영상 인식</span>
                         <span class="pub-authors">한성화, <span class="me">김현욱</span>, 나기현, 김인중</span>
                         <span class="pub-venue">한국정보과학회 2023 한국소프트웨어종합학술대회 논문집 (KSC 2023), pp. 967-969, Dec 2023.</span>
-                        <div style="font-size: 0.85rem; color: #888; margin-top: 4px;">
+                        <div style="font-size: 0.85rem; color: var(--text-gray); margin-top: 4px;">
                              (Eng) Deep Learning-based Road Image Recognition in APACHE5 NPU SoC Environment
                         </div>
                     </div>
@@ -387,6 +435,35 @@
     </footer>
 
     <script>
+        // 1. 다크모드 로직
+        const toggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // 저장된 테마 불러오기
+        const currentTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (currentTheme === 'dark' || (!currentTheme && systemPrefersDark)) {
+            body.classList.add('dark-mode');
+            toggleBtn.textContent = '🌙';
+        } else {
+            toggleBtn.textContent = '☀️';
+        }
+
+        // 버튼 클릭 이벤트
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                toggleBtn.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                toggleBtn.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // 2. 눈 내리는 효과 (Script)
         document.addEventListener("DOMContentLoaded", function() {
             const snowContainer = document.createElement("div");
             snowContainer.id = "snow-container";
@@ -396,7 +473,7 @@
                 left: "0",
                 width: "100%",
                 height: "100%",
-                pointerEvents: "none", /* 눈이 클릭을 방해하지 않게 함 */
+                pointerEvents: "none",
                 zIndex: "9999",
                 overflow: "hidden"
             });
@@ -404,12 +481,11 @@
 
             function createSnowflake() {
                 const snowflake = document.createElement("div");
-                snowflake.innerHTML = "❄"; /* 눈송이 모양 (이모지 대신 .을 쓰면 더 심플함) */
+                snowflake.innerHTML = "❄";
                 
-                // 눈송이 스타일 무작위 설정
-                const size = Math.random() * 10 + 10 + "px"; // 10px ~ 20px
+                const size = Math.random() * 10 + 10 + "px"; 
                 const startLeft = Math.random() * window.innerWidth + "px";
-                const duration = Math.random() * 3 + 5 + "s"; // 5초 ~ 8초 (천천히)
+                const duration = Math.random() * 3 + 5 + "s"; 
                 const opacity = Math.random() * 0.5 + 0.3;
                 
                 Object.assign(snowflake.style, {
@@ -417,33 +493,27 @@
                     top: "-20px",
                     left: startLeft,
                     fontSize: size,
-                    color: "#a5b4fc", /* 살짝 푸른빛 도는 눈 (흰 배경에서도 잘 보임) */
+                    color: "#a5b4fc", 
                     opacity: opacity,
                     animation: `fall ${duration} linear infinite`
                 });
 
-                // 애니메이션 키프레임 동적 추가 (한 번만 추가되도록 처리 필요하지만 간편함을 위해 인라인 스타일로 대체 불가하여 JS로 처리)
-                // *간단한 구현을 위해 CSS transition 대신 Web Animation API 사용*
                 snowflake.animate([
                     { transform: `translate(0, 0) rotate(0deg)` },
                     { transform: `translate(${Math.random()*100 - 50}px, ${window.innerHeight + 50}px) rotate(${Math.random()*360}deg)` }
                 ], {
-                    duration: (Math.random() * 3000) + 5000, // 5~8초
+                    duration: (Math.random() * 3000) + 5000, 
                     iterations: 1,
                     easing: 'linear'
                 }).onfinish = () => {
-                    snowflake.remove(); // 바닥에 닿으면 삭제 (메모리 관리)
+                    snowflake.remove(); 
                 };
 
                 snowContainer.appendChild(snowflake);
             }
 
-            // 0.3초마다 눈송이 생성
             setInterval(createSnowflake, 300);
         });
     </script>
-</body>
-</html>
-    
 </body>
 </html>
