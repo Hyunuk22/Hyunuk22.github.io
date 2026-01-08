@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Lab Name</title>
+    <title>INTERACTION Lab - POSTECH</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="#">LAB NAME</a>
+            <a class="navbar-brand" href="index.html">INTERACTION</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#members">Members</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#publication">Publication</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="members.html">Members</a></li>
+                    <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+                    <li class="nav-item"><a class="nav-link" href="publication.html">Publication</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -33,25 +32,19 @@
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active"></button>
             <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2"></button>
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active" style="background-image: url('https://placehold.co/1920x800/2c3e50/white?text=Lab+Group+Photo');">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Welcome to Our Lab</h5>
-                    <p>Pioneering Research in HCI & Haptics</p>
+            <div class="carousel-item active" style="background-image: url('https://placehold.co/1920x600/2c3e50/white?text=Interaction+Lab');">
+                <div class="carousel-overlay"></div> <div class="carousel-caption d-none d-md-block">
+                    <h5>INTERACTION LAB</h5>
+                    <p class="fs-5">Designing the Future of Human-Computer Interaction</p>
                 </div>
             </div>
-            <div class="carousel-item" style="background-image: url('https://placehold.co/1920x800/34495e/white?text=Experiment+Scene');">
+            <div class="carousel-item" style="background-image: url('https://placehold.co/1920x600/004098/white?text=Haptics+Research');">
+                <div class="carousel-overlay"></div>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Innovative Experiments</h5>
-                    <p>Exploring the future of interaction</p>
-                </div>
-            </div>
-            <div class="carousel-item" style="background-image: url('https://placehold.co/1920x800/16a085/white?text=Conference+Presentation');">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Global Impact</h5>
-                    <p>Sharing our findings with the world</p>
+                    <h5>Haptics & VR</h5>
+                    <p class="fs-5">Immersive Technologies for Everyone</p>
                 </div>
             </div>
         </div>
@@ -63,128 +56,20 @@
         </button>
     </header>
 
-    <section id="news" class="section-padding">
-        <div class="container">
-            <h2 class="section-title">Latest News</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Paper Accepted at UIST</h5>
-                            <p class="card-text text-muted">2026.01.05</p>
-                            <p class="card-text">Our latest research on Haptic feedback has been accepted.</p>
-                        </div>
-                    </div>
-                </div>
-                </div>
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-4 fw-bold">Welcome to INTERACTION Lab</h2>
+            <p class="lead text-muted mw-75 mx-auto">
+                We focus on haptic feedback, virtual reality, and accessibility technologies.<br>
+                Our goal is to create more immersive and inclusive interactive systems.
+            </p>
         </div>
     </section>
 
-    <section id="members" class="section-padding bg-light">
+    <footer class="py-4 bg-light text-center border-top mt-auto">
         <div class="container">
-            <h2 class="section-title">Members</h2>
-            <div class="row text-center">
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card border-0 shadow-sm">
-                        <img src="https://placehold.co/300x300?text=Prof" class="card-img-top" alt="Professor">
-                        <div class="card-body">
-                            <h5 class="card-title">Prof. Name</h5>
-                            <p class="card-text text-primary">Director</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card border-0 shadow-sm">
-                        <img src="https://placehold.co/300x300?text=Student" class="card-img-top" alt="Student">
-                        <div class="card-body">
-                            <h5 class="card-title">Hyunuk Kim</h5>
-                            <p class="card-text text-muted">M.S. Student</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p class="mb-0 text-muted">&copy; 2026 INTERACTION Lab. POSTECH.</p>
         </div>
-    </section>
-
-    <section id="research" class="section-padding">
-        <div class="container">
-            <h2 class="section-title">Research Areas</h2>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <img src="https://placehold.co/150" class="rounded" alt="...">
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h4>Haptic Feedback</h4>
-                            <p>Researching immersive tactile feedback systems for VR environments.</p>
-                        </div>
-                    </div>
-                </div>
-                 <div class="col-md-6 mb-4">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <img src="https://placehold.co/150" class="rounded" alt="...">
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h4>HCI & Accessibility</h4>
-                            <p>Developing assistive technologies for DHH users.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="publication" class="section-padding bg-light">
-        <div class="container">
-            <h2 class="section-title">Publications</h2>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-transparent">
-                    <strong>[Conference]</strong> Title of the Paper, Author list, <i>Conference Name</i>, Year.
-                </li>
-                <li class="list-group-item bg-transparent">
-                    <strong>[Journal]</strong> Title of the Journal Paper, Author list, <i>Journal Name</i>, Year.
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="gallery" class="section-padding">
-        <div class="container">
-            <h2 class="section-title">Gallery</h2>
-            <div class="row g-2">
-                <div class="col-md-4">
-                    <img src="https://placehold.co/600x400" class="img-fluid rounded" alt="Gallery 1">
-                </div>
-                <div class="col-md-4">
-                    <img src="https://placehold.co/600x400" class="img-fluid rounded" alt="Gallery 2">
-                </div>
-                <div class="col-md-4">
-                    <img src="https://placehold.co/600x400" class="img-fluid rounded" alt="Gallery 3">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section-padding bg-dark text-white">
-        <div class="container">
-            <h2 class="section-title text-white">Contact Us</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Location</h5>
-                    <p>Engineering Building #123, POSTECH<br>Pohang, Republic of Korea</p>
-                </div>
-                <div class="col-md-6">
-                    <h5>Email</h5>
-                    <p>contact@postech.ac.kr</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="text-center py-3 bg-dark text-secondary border-top border-secondary">
-        <small>&copy; 2026 Lab Name. All Rights Reserved.</small>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
