@@ -1,0 +1,78 @@
+/* 기본 폰트 설정 */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    padding-top: 56px; /* 네비게이션 바 높이만큼 여백 */
+}
+
+/* 네비게이션 바 스타일 */
+.navbar-brand {
+    font-size: 1.5rem;
+    color: #004098 !important; /* POSTECH Blue 계열 */
+}
+
+.nav-link {
+    color: #444 !important;
+    font-weight: 500;
+    margin-left: 15px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #004098 !important;
+}
+
+/* 슬라이드(Carousel) 스타일 */
+.carousel-item {
+    height: 85vh; /* 화면 높이의 85% */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* 이미지 위에 어두운 오버레이 추가 (글씨 잘 보이게) */
+.carousel-item::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.carousel-caption {
+    bottom: 40%;
+}
+
+.carousel-caption h5 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.carousel-caption p {
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+}
+
+/* 섹션 공통 스타일 */
+.section-padding {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+    position: relative;
+}
+
+/* 섹션 제목 밑줄 효과 */
+.section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #004098;
+    margin: 15px auto 0;
+}
