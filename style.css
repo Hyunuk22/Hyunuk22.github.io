@@ -2,92 +2,82 @@
 
 /* 1. 기본 설정 & 폰트 */
 body {
-    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: #333;
-    line-height: 1.6;
-    padding-top: 70px; /* 네비게이션 높이 확보 */
+    line-height: 1.7;
+    padding-top: 76px; /* 네비게이션바 높이만큼 확보 */
+    background-color: #f8f9fa; /* 전체 배경색을 약간 밝은 회색으로 */
 }
 
-/* 2. 네비게이션 바 (세련된 그림자 및 호버 효과) */
-.navbar {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(10px); /* 블러 효과 */
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-}
+h1, h2, h3, h4, h5, h6 { font-weight: 700; letter-spacing: -0.5px; }
 
-.navbar-brand {
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    color: #004098 !important; /* POSTECH Blue */
-}
-
-.nav-link {
+/* 2. 네비게이션 바 Custom */
+.navbar .nav-link {
     color: #555 !important;
-    font-weight: 600;
-    margin-left: 20px;
+    margin-left: 25px;
     font-size: 0.95rem;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+}
+.navbar .nav-link:hover, .navbar .nav-link.active {
+    color: #d60036 !important; /* POSTECH Red 포인트 */
 }
 
-.nav-link:hover, .nav-link.active {
-    color: #004098 !important;
-}
+/* 3. 메인 Swiper 슬라이드 스타일 (핵심) */
+.main-slider-section { overflow: hidden; }
 
-/* 3. 메인 슬라이드 (Carousel) 높이 축소 및 디자인 */
-.carousel-item {
-    height: 55vh; /* 화면 높이의 55%로 축소 (기존 85vh에서 줄임) */
-    min-height: 400px; /* 너무 작아지지 않도록 최소 높이 설정 */
-    background-size: cover;
-    background-position: center;
-}
-
-/* 이미지 위 어두운 그라데이션 (텍스트 가독성 UP) */
-.carousel-overlay {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-}
-
-.carousel-caption {
-    bottom: 30%;
-}
-
-.carousel-caption h5 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-/* 4. 서브 페이지 헤더 (모든 서브 페이지 상단에 들어갈 띠) */
-.page-header {
-    background: #004098; /* POSTECH Blue */
-    color: white;
-    padding: 60px 0;
-    margin-bottom: 50px;
-    text-align: center;
-}
-
-.page-header h1 {
-    font-weight: 700;
-    font-size: 2.5rem;
-}
-
-/* 5. 카드 및 섹션 스타일 */
-.section-title {
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: #222;
-    border-left: 5px solid #004098;
-    padding-left: 15px;
-}
-
-.card {
-    transition: transform 0.3s, box-shadow 0.3s;
+.swiper-slide {
+    width: 85%; /* 모바일 기준 너비 */
+    height: 400px; /* 모바일 기준 높이 */
+    border-radius: 20px;
     overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    opacity: 0.5; /* 비활성 슬라이드 투명도 */
+    transform: scale(0.9); /* 비활성 슬라이드 크기 축소 */
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+/* PC 화면 크기에서의 슬라이드 크기 */
+@media (min-width: 992px) {
+    .swiper-slide { height: 600px; width: 70%; }
 }
+
+/* 활성화된(가운데) 슬라이드 스타일 */
+.swiper-slide-active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 10;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2); /* 그림자 더 진하게 */
+}
+
+.swiper-slide img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+
+/* Swiper 네비게이션 버튼 Custom */
+.swiper-button-next, .swiper-button-prev {
+    color: #333;
+    background: rgba(255,255,255,0.9);
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+.swiper-button-next:hover, .swiper-button-prev:hover { background: #fff; transform: scale(1.1); }
+.swiper-button-next::after, .swiper-button-prev::after { font-size: 1.8rem; font-weight: bold; }
+.swiper-pagination-bullet { width: 10px; height: 10px; background: #ccc; opacity: 1; }
+.swiper-pagination-bullet-active { background: #d60036; width: 25px; border-radius: 5px; transition: all 0.3s; }
+
+/* 4. 뉴스 카드 호버 효과 */
+.news-card-hover { transition: transform 0.3s, box-shadow 0.3s; }
+.news-card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+}
+
+/* 5. 서브 페이지 공통 헤더 스타일 */
+.page-header {
+    background: linear-gradient(135deg, #d60036, #2c3e50); /* POSTECH Red & Dark Blue 그라데이션 */
+    color: white; padding: 80px 0; margin-bottom: 60px; text-align: center;
+}
+.page-header h1 { font-size: 3rem; }
+.section-title { border-left: 5px solid #d60036; padding-left: 20px; margin-bottom: 40px; color: #2c3e50; }
