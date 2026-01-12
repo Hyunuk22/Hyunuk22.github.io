@@ -119,5 +119,56 @@
             }
         });
     </script>
+
+    <div class="cursor-follower"></div>
+
+    <script>
+        // 1. 마그네틱 버튼 효과
+        const magnets = document.querySelectorAll('.nav-link'); // 네비게이션 링크들에 적용
+    
+        magnets.forEach((magnet) => {
+            // CSS 클래스 추가 (애니메이션 준비)
+            magnet.classList.add('magnetic-item');
+    
+            magnet.addEventListener('mousemove', (e) => {
+                const position = magnet.getBoundingClientRect();
+                
+                // 버튼의 중심점 계산
+                const x = e.pageX - position.left - position.width / 2;
+                const y = e.pageY - position.top - position.height / 2;
+    
+                // 자석 효과 강도 (숫자가 클수록 더 멀리 따라옴)
+                const strength = 15; 
+                
+                // 버튼을 마우스 방향으로 이동
+                magnet.style.transform = `translate(${x / strength}px, ${y / strength}px)`;
+            });
+    
+            magnet.addEventListener('mouseleave', () => {
+                // 마우스가 떠나면 원위치로 복귀 (CSS transition 덕분에 부드럽게 돌아감)
+                magnet.style.transform = 'translate(0px, 0px)';
+            });
+        });
+    
+        // 2. 커서 팔로워 효과 (따라다니는 원)
+        const cursor = document.querySelector('.cursor-follower');
+        
+        // 마우스 움직임 추적
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+    
+        // 링크 위에 올라갔을 때 커서 모양 변경
+        const links = document.querySelectorAll('a, button, .btn');
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.classList.add('active');
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
