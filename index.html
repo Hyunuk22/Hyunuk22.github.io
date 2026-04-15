@@ -31,83 +31,114 @@
 
     /* ── NAV ── */
     nav {
-      position: sticky; top: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 0 2rem; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
       background: rgba(255,255,255,0.92);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      height: 56px;
-      display: flex; align-items: center; justify-content: space-between;
+      border-bottom-color: var(--border);
     }
     .nav-name {
-      font-size: 0.95rem; font-weight: 700; color: var(--text);
-      text-decoration: none; letter-spacing: -0.01em;
+      font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em;
+      text-decoration: none; color: #fff; transition: color 0.3s;
     }
+    nav.scrolled .nav-name { color: var(--text); }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
-      color: var(--muted); text-decoration: none;
-      font-size: 0.85rem; font-weight: 500;
-      transition: color 0.15s;
+      text-decoration: none; font-size: 0.85rem; font-weight: 500;
+      transition: color 0.2s; color: rgba(255,255,255,0.75);
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: #fff; }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    nav.scrolled .nav-links a:hover { color: var(--text); }
 
-    /* ── HERO ── */
-    .hero {
-      max-width: 860px; margin: 0 auto;
-      padding: 5rem 2rem 4rem;
+    /* ── HERO BANNER (parallax) ── */
+    .hero-banner {
+      position: relative; height: 100vh; min-height: 600px;
+      display: flex; align-items: center; justify-content: center;
+      background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      overflow: hidden;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(10,15,40,0.82) 0%, rgba(10,20,60,0.65) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 860px; width: 100%; margin: 0 auto;
+      padding: 0 2rem;
       display: grid; grid-template-columns: 1fr auto;
-      gap: 3rem; align-items: start;
+      gap: 3rem; align-items: center;
     }
     .hero-tag {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.78rem; font-weight: 600; color: var(--accent);
-      background: var(--accent-light); padding: 0.3rem 0.8rem;
-      border-radius: 999px; margin-bottom: 1.2rem;
-      letter-spacing: 0.02em;
+      font-size: 0.78rem; font-weight: 600; color: #6ee7b7;
+      background: rgba(110,231,183,0.12);
+      border: 1px solid rgba(110,231,183,0.3);
+      padding: 0.3rem 0.8rem; border-radius: 999px;
+      margin-bottom: 1.2rem; letter-spacing: 0.02em;
     }
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      font-weight: 800; line-height: 1.15;
-      letter-spacing: -0.03em; margin-bottom: 0.4rem;
+    .hero-content h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800; line-height: 1.12;
+      letter-spacing: -0.03em; margin-bottom: 0.4rem; color: #fff;
     }
-    .hero h1 .ko {
-      font-size: 0.55em; font-weight: 500;
-      color: var(--muted); margin-left: 0.4rem;
+    .hero-content h1 .ko {
+      font-size: 0.5em; font-weight: 400;
+      color: rgba(255,255,255,0.5); margin-left: 0.5rem;
     }
     .hero-role {
-      font-size: 1rem; color: var(--muted); font-weight: 400;
-      margin-bottom: 1.5rem; line-height: 1.7;
+      font-size: 1rem; color: rgba(255,255,255,0.65);
+      font-weight: 400; margin-bottom: 1.4rem; line-height: 1.7;
     }
-    .hero-role strong { color: var(--text); font-weight: 600; }
+    .hero-role strong { color: rgba(255,255,255,0.9); font-weight: 600; }
     .hero-bio {
-      font-size: 0.95rem; color: var(--muted); line-height: 1.85;
-      max-width: 520px; margin-bottom: 2rem;
+      font-size: 0.92rem; color: rgba(255,255,255,0.55);
+      line-height: 1.85; max-width: 500px; margin-bottom: 2rem;
     }
     .hero-links { display: flex; flex-wrap: wrap; gap: 0.7rem; }
     .hero-link {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.82rem; font-weight: 500; text-decoration: none;
-      padding: 0.45rem 1rem; border-radius: 8px;
-      transition: all 0.15s;
+      font-size: 0.82rem; font-weight: 600; text-decoration: none;
+      padding: 0.5rem 1.2rem; border-radius: 8px; transition: all 0.2s;
     }
-    .hero-link.primary { background: var(--text); color: #fff; }
-    .hero-link.primary:hover { background: #374151; }
-    .hero-link.outline { border: 1px solid var(--border); color: var(--muted); }
-    .hero-link.outline:hover { border-color: #9ca3af; color: var(--text); }
-
+    .hero-link.primary {
+      background: #fff; color: #111827;
+    }
+    .hero-link.primary:hover { background: #f3f4f6; transform: translateY(-1px); }
+    .hero-link.outline {
+      border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.8);
+    }
+    .hero-link.outline:hover {
+      border-color: rgba(255,255,255,0.5); color: #fff; transform: translateY(-1px);
+    }
     .hero-photo {
       width: 160px; height: 160px; border-radius: 16px;
-      background: var(--light); border: 1px solid var(--border);
+      border: 2px solid rgba(255,255,255,0.2);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; overflow: hidden;
-      font-size: 0.72rem; color: var(--muted); text-align: center;
+      background: rgba(255,255,255,0.06);
     }
     .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
     .photo-placeholder {
       display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-      color: var(--muted); font-size: 0.72rem; padding: 1rem;
+      color: rgba(255,255,255,0.3); font-size: 0.72rem; padding: 1rem;
     }
-    .photo-placeholder svg { opacity: 0.3; }
+    .photo-placeholder svg { opacity: 0.4; }
+    .hero-scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      color: rgba(255,255,255,0.4); font-size: 0.72rem; letter-spacing: 0.08em;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
 
     /* ── SECTION ── */
     .section {
@@ -115,6 +146,12 @@
       padding: 4rem 2rem;
       border-top: 1px solid var(--border);
     }
+    /* slide-up on scroll */
+    .slide-up {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .slide-up.visible { opacity: 1; transform: translateY(0); }
     .section-label {
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--accent);
@@ -245,12 +282,15 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      .hero { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-content { grid-template-columns: 1fr; gap: 2rem; }
       .hero-photo { width: 100px; height: 100px; order: -1; }
       .nav-links { display: none; }
       .pub-item { grid-template-columns: 1fr; gap: 0.3rem; }
       .pub-year { display: inline; margin-right: 0.5rem; }
       .exp-item { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+    @media (max-width: 768px) {
+      .hero-banner { background-attachment: scroll; }
     }
   </style>
 </head>
@@ -270,41 +310,50 @@
 </nav>
 
 <!-- ── HERO ── -->
-<div class="hero">
-  <div>
-    <div class="hero-tag">PhD Student · POSTECH CSE</div>
-    <h1>Kim Hyun Uk <span class="ko">김현욱</span></h1>
-    <div class="hero-role">
-      PhD Candidate, <strong>Department of Computer Science and Engineering</strong><br/>
-      Pohang University of Science and Technology (POSTECH)
+<div class="hero-banner">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-tag">PhD Student · POSTECH CSE</div>
+      <h1>Kim Hyun Uk <span class="ko">김현욱</span></h1>
+      <div class="hero-role">
+        PhD Candidate, <strong>Department of Computer Science and Engineering</strong><br/>
+        Pohang University of Science and Technology (POSTECH)
+      </div>
+      <p class="hero-bio">
+        I am a first-year PhD student at POSTECH CSE, where I previously completed my Master's degree.
+        My research lies at the intersection of <strong style="color:rgba(255,255,255,0.8)">Human-Computer Interaction (HCI)</strong> and
+        <strong style="color:rgba(255,255,255,0.8)">Haptics</strong>, exploring how people perceive, interact with, and are empowered
+        by technology through the sense of touch.
+      </p>
+      <div class="hero-links">
+        <a href="mailto:vldrjrmtxkdlf@postech.ac.kr" class="hero-link primary">✉ Email</a>
+        <a href="https://github.com/Hyunuk22" class="hero-link outline" target="_blank">GitHub</a>
+        <a href="#publications" class="hero-link outline">Publications</a>
+      </div>
     </div>
-    <p class="hero-bio">
-      I am a first-year PhD student at POSTECH CSE, where I previously completed my Master's degree.
-      My research lies at the intersection of <strong>Human-Computer Interaction (HCI)</strong> and
-      <strong>Haptics</strong>, exploring how people perceive, interact with, and are empowered
-      by technology through the sense of touch.
-    </p>
-    <div class="hero-links">
-      <a href="mailto:vldrjrmtxkdlf@postech.ac.kr" class="hero-link primary">✉ Email</a>
-      <a href="https://github.com/Hyunuk22" class="hero-link outline" target="_blank">GitHub</a>
-      <a href="#publications" class="hero-link outline">Publications</a>
+    <div class="hero-photo">
+      <img src="IMG/photo.jpg" alt="Kim Hyun Uk"
+        onerror="this.style.display='none'; this.parentElement.querySelector('.photo-placeholder').style.display='flex';" />
+      <div class="photo-placeholder">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        <span>Photo</span>
+      </div>
     </div>
   </div>
-  <div class="hero-photo">
-    <img src="IMG/photo.jpg" alt="Kim Hyun Uk"
-      onerror="this.style.display='none'; this.parentElement.querySelector('.photo-placeholder').style.display='flex';" />
-    <div class="photo-placeholder">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="1.5">
-        <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-      </svg>
-      <span>Photo</span>
-    </div>
+  <div class="hero-scroll-hint">
+    <span>SCROLL</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
   </div>
 </div>
 
 <!-- ── RESEARCH ── -->
 <div id="research"></div>
-<div class="section">
+<div class="section slide-up">
   <div class="section-label">Research Interests</div>
   <div class="research-grid">
     <div class="research-card">
@@ -506,6 +555,27 @@
 <footer>
   <p>© 2026 Kim Hyun Uk · POSTECH CSE · Last updated April 2026</p>
 </footer>
+
+<script>
+  // ── Nav: transparent → frosted on scroll ──
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // ── Slide-up on scroll ──
+  const slideEls = document.querySelectorAll('.slide-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = `${i * 0.05}s`;
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  slideEls.forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
