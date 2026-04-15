@@ -171,6 +171,48 @@
     .pub-link:hover { background: var(--accent-light); }
     .pub-note { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-top: 0.5rem; }
 
+    /* ── CONFERENCES ── */
+    .conf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+    .conf-card {
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.4rem 1rem 1.2rem;
+      text-align: center; transition: all 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .conf-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .conf-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .conf-card.chi::before   { background: linear-gradient(90deg, #7c3aed, #a855f7); }
+    .conf-card.uist::before  { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+    .conf-card.khci::before  { background: linear-gradient(90deg, #dc2626, #f87171); }
+    .conf-card.haptics::before { background: linear-gradient(90deg, #d97706, #fbbf24); }
+
+    .conf-abbr {
+      font-size: 1.3rem; font-weight: 900;
+      letter-spacing: -0.02em; line-height: 1; margin-bottom: 0.4rem;
+    }
+    .conf-card.chi   .conf-abbr { color: #7c3aed; }
+    .conf-card.uist  .conf-abbr { color: #2563eb; }
+    .conf-card.khci  .conf-abbr { color: #dc2626; }
+    .conf-card.haptics .conf-abbr { color: #d97706; }
+
+    .conf-full { font-size: 0.68rem; color: var(--muted); line-height: 1.4; margin-bottom: 0.6rem; }
+    .conf-years { display: flex; gap: 0.3rem; justify-content: center; flex-wrap: wrap; }
+    .conf-year {
+      font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+    }
+    .conf-card.chi   .conf-year { background: #f3e8ff; color: #7c3aed; }
+    .conf-card.uist  .conf-year { background: #eff6ff; color: #2563eb; }
+    .conf-card.khci  .conf-year { background: #fef2f2; color: #dc2626; }
+    .conf-card.haptics .conf-year { background: #fffbeb; color: #d97706; }
+
     /* ── EXPERIENCE ── */
     .exp-list { display: flex; flex-direction: column; }
     .exp-item {
@@ -221,6 +263,7 @@
     <li><a href="#research">Research</a></li>
     <li><a href="#publications">Publications</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#conferences">Conferences</a></li>
     <li><a href="#funding">Funding</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -379,6 +422,49 @@
   </div>
 </div>
 
+<!-- ── CONFERENCES ── -->
+<div id="conferences"></div>
+<div class="section">
+  <div class="section-label">Conference Participation</div>
+  <div class="conf-grid">
+
+    <div class="conf-card chi">
+      <div class="conf-abbr">CHI</div>
+      <div class="conf-full">ACM Conference on Human Factors in Computing Systems</div>
+      <div class="conf-years">
+        <span class="conf-year">2025</span>
+      </div>
+    </div>
+
+    <div class="conf-card uist">
+      <div class="conf-abbr">UIST</div>
+      <div class="conf-full">ACM Symposium on User Interface Software and Technology</div>
+      <div class="conf-years">
+        <span class="conf-year">2025</span>
+      </div>
+    </div>
+
+    <div class="conf-card khci">
+      <div class="conf-abbr">KHCI</div>
+      <div class="conf-full">Korean Conference on Human-Computer Interaction</div>
+      <div class="conf-years">
+        <span class="conf-year">2024</span>
+        <span class="conf-year">2025</span>
+      </div>
+    </div>
+
+    <div class="conf-card haptics">
+      <div class="conf-abbr">KHS</div>
+      <div class="conf-full">Korea Haptics Society Annual Conference</div>
+      <div class="conf-years">
+        <span class="conf-year">2024</span>
+        <span class="conf-year">2025</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- ── FUNDING ── -->
 <div id="funding"></div>
 <div class="section">
@@ -386,11 +472,11 @@
   <div class="exp-list">
 
     <div class="exp-item">
-      <div class="exp-period">2023 –<br/>2025</div>
+      <div class="exp-period">2024.09 –<br/>2025.09</div>
       <div>
         <div class="exp-role">Visual/Audio Based Real-Time Haptic Effects Generation For Cinematic Effect Enhancement</div>
         <div class="exp-where">시네마틱 효과 개선을 위한 소리-영상 기반 실시간 햅틱 효과 생성 연구</div>
-        <div class="exp-desc">₩12,000,000 / year · Master's Research Grant</div>
+        <div class="exp-desc">₩12,000,000 · 1-Year Research Grant</div>
       </div>
     </div>
 
