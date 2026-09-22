@@ -88,24 +88,24 @@
     .sidebar-link.primary:hover { background: #1f2937; }
     .sidebar-link.outline { border: 1px solid var(--border); color: var(--text); }
     .sidebar-link.outline:hover { border-color: #9ca3af; }
-    .sidebar-nav {
-      display: flex; flex-direction: column; gap: 0.25rem; width: 100%;
-      padding-top: 1.5rem; border-top: 1px solid var(--border);
-    }
-    .sidebar-nav a {
-      display: block; text-align: left; white-space: nowrap;
-      padding: 0.55rem 0.8rem; border-radius: 8px;
-      font-size: 0.85rem; font-weight: 600; color: var(--muted);
-      text-decoration: none; transition: all 0.15s;
-    }
-    .sidebar-nav a:hover { background: var(--light); color: var(--text); }
-    .sidebar-nav a.active { background: var(--accent-light); color: var(--accent); }
-
     /* ── CONTENT / SECTION ── */
     .content { flex: 1; min-width: 0; }
+    .content-tabs {
+      display: flex; gap: 1.8rem; flex-wrap: wrap;
+      padding: 2.2rem 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .content-tabs a {
+      padding: 0 0 0.9rem; white-space: nowrap;
+      font-size: 0.88rem; font-weight: 600; color: var(--muted);
+      text-decoration: none; border-bottom: 2px solid transparent; margin-bottom: -1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .content-tabs a:hover { color: var(--text); }
+    .content-tabs a.active { color: var(--accent); border-bottom-color: var(--accent); }
     .section {
       max-width: 760px; margin: 0;
-      padding: 3.5rem 3rem;
+      padding: 2.5rem 3rem 3.5rem;
     }
     /* ── TAB PANELS ── */
     .tab-panel { display: none; }
@@ -197,13 +197,12 @@
       .sidebar-photo { width: 120px; height: 120px; }
       .sidebar-links { flex-direction: row; flex-wrap: wrap; justify-content: center; }
       .sidebar-link { flex: 1 1 auto; }
-      .sidebar-nav {
-        flex-direction: row; overflow-x: auto; padding-top: 1.2rem;
+      .content-tabs {
+        gap: 1.2rem; overflow-x: auto; padding: 1.5rem 1.5rem 0;
         -ms-overflow-style: none; scrollbar-width: none;
       }
-      .sidebar-nav::-webkit-scrollbar { display: none; }
-      .sidebar-nav a { padding: 0.5rem 0.7rem; }
-      .section { padding: 2.5rem 1.5rem; }
+      .content-tabs::-webkit-scrollbar { display: none; }
+      .section { padding: 2rem 1.5rem 3rem; }
       .pub-item { grid-template-columns: 1fr; gap: 0.3rem; }
       .pub-year { display: inline; margin-right: 0.5rem; }
       .exp-item { grid-template-columns: 1fr; gap: 0.3rem; }
@@ -236,17 +235,18 @@
     <a href="mailto:vldrjrmtxkdlf@postech.ac.kr" class="sidebar-link primary">✉ Email</a>
     <a href="https://github.com/Hyunuk22" class="sidebar-link outline" target="_blank">GitHub</a>
   </div>
-  <nav class="sidebar-nav">
-    <a href="#about" class="active">About</a>
-    <a href="#experience">Experience</a>
-    <a href="#publications">Publications</a>
-    <a href="#funding">Funding</a>
-    <a href="#contact">Contact</a>
-  </nav>
 </aside>
 
 <!-- ── CONTENT ── -->
 <main class="content">
+
+<nav class="content-tabs">
+  <a href="#about" class="active">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#publications">Publications</a>
+  <a href="#funding">Funding</a>
+  <a href="#contact">Contact</a>
+</nav>
 
 <!-- ── ABOUT (draft — replace with final bio) ── -->
 <div class="section tab-panel active" id="about">
@@ -456,7 +456,7 @@
 <script>
   // ── Click-to-switch tabs (no more long scrolling) ──
   const panels = document.querySelectorAll('.tab-panel');
-  const navLinks = document.querySelectorAll('.sidebar-nav a');
+  const navLinks = document.querySelectorAll('.content-tabs a');
 
   function showTab(id) {
     let matched = false;
