@@ -14,12 +14,13 @@
       --muted: #6b7280;
       --light: #f9fafb;
       --border: #e5e7eb;
-      --accent: #2563eb;
-      --accent-light: #eff6ff;
+      --accent: #A61955;
+      --accent-light: #fbecf1;
+      --accent-border: #eebdd0;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 18px; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -34,77 +35,58 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       padding: 0 2rem; height: 56px;
       display: flex; align-items: center; justify-content: space-between;
-      transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
-      border-bottom: 1px solid transparent;
+      background: #fff; border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
     nav.scrolled {
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
       border-bottom-color: var(--border);
+      box-shadow: 0 1px 12px rgba(0,0,0,0.03);
     }
     .nav-name {
       font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em;
-      text-decoration: none; color: #fff; transition: color 0.3s;
+      text-decoration: none; color: var(--text);
     }
-    nav.scrolled .nav-name { color: var(--text); }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       text-decoration: none; font-size: 0.85rem; font-weight: 500;
-      transition: color 0.2s; color: rgba(255,255,255,0.75);
+      transition: color 0.2s; color: var(--muted);
     }
-    .nav-links a:hover { color: #fff; }
-    nav.scrolled .nav-links a { color: var(--muted); }
-    nav.scrolled .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: var(--text); }
 
-    /* ── HERO BANNER (parallax) ── */
+    /* ── HERO ── */
     .hero-banner {
-      position: relative; height: 100vh; min-height: 600px;
-      display: flex; align-items: center; justify-content: center;
-      background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=80');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      overflow: hidden;
+      position: relative;
+      padding: 8rem 2rem 4rem;
       width: 100%;
     }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(10,15,40,0.82) 0%, rgba(10,20,60,0.65) 100%);
-    }
     .hero-content {
-      position: relative; z-index: 1;
       max-width: 860px; width: 100%; margin: 0 auto;
-      padding: 0 2rem;
-      display: grid; grid-template-columns: 1fr 180px;
-      gap: 3rem; align-items: center;
+      display: grid; grid-template-columns: 1fr 140px;
+      gap: 2.8rem; align-items: center;
       box-sizing: border-box;
     }
     .hero-tag {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.78rem; font-weight: 600; color: #6ee7b7;
-      background: rgba(110,231,183,0.12);
-      border: 1px solid rgba(110,231,183,0.3);
+      font-size: 0.78rem; font-weight: 600; color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid var(--accent-border);
       padding: 0.3rem 0.8rem; border-radius: 999px;
-      margin-bottom: 1.2rem; letter-spacing: 0.02em;
+      margin-bottom: 1.1rem; letter-spacing: 0.02em;
     }
     .hero-content h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800; line-height: 1.12;
-      letter-spacing: -0.03em; margin-bottom: 0.4rem; color: #fff;
+      font-size: clamp(1.9rem, 4.5vw, 2.6rem);
+      font-weight: 800; line-height: 1.15;
+      letter-spacing: -0.03em; margin-bottom: 0.5rem; color: var(--text);
     }
     .hero-content h1 .ko {
       font-size: 0.5em; font-weight: 400;
-      color: rgba(255,255,255,0.5); margin-left: 0.5rem;
+      color: var(--muted); margin-left: 0.5rem;
     }
     .hero-role {
-      font-size: 1rem; color: rgba(255,255,255,0.65);
-      font-weight: 400; margin-bottom: 1.4rem; line-height: 1.7;
+      font-size: 0.95rem; color: var(--muted);
+      font-weight: 400; margin-bottom: 1.3rem; line-height: 1.6;
     }
-    .hero-role strong { color: rgba(255,255,255,0.9); font-weight: 600; }
-    .hero-bio {
-      font-size: 0.92rem; color: rgba(255,255,255,0.55);
-      line-height: 1.85; max-width: 500px; margin-bottom: 2rem;
-    }
+    .hero-role strong { color: var(--text); font-weight: 600; }
     .hero-links { display: flex; flex-wrap: wrap; gap: 0.7rem; }
     .hero-link {
       display: inline-flex; align-items: center; gap: 0.4rem;
@@ -112,36 +94,29 @@
       padding: 0.5rem 1.2rem; border-radius: 8px; transition: all 0.2s;
     }
     .hero-link.primary {
-      background: #fff; color: #111827;
+      background: var(--text); color: #fff;
     }
-    .hero-link.primary:hover { background: #f3f4f6; transform: translateY(-1px); }
+    .hero-link.primary:hover { background: #1f2937; transform: translateY(-1px); }
     .hero-link.outline {
-      border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.8);
+      border: 1px solid var(--border); color: var(--text);
     }
     .hero-link.outline:hover {
-      border-color: rgba(255,255,255,0.5); color: #fff; transform: translateY(-1px);
+      border-color: #9ca3af; transform: translateY(-1px);
     }
     .hero-photo {
-      width: 160px; height: 200px; border-radius: 16px;
-      border: 2px solid rgba(255,255,255,0.2);
+      width: 120px; height: 120px; border-radius: 50%;
+      border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
-      background: rgba(255,255,255,0.06);
+      background: var(--light);
       flex-shrink: 0;
     }
     .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .photo-placeholder {
       display: none; flex-direction: column; align-items: center; gap: 0.4rem;
-      color: rgba(255,255,255,0.3); font-size: 0.72rem; padding: 1rem;
+      color: #9ca3af; font-size: 0.68rem; padding: 1rem;
     }
     .photo-placeholder svg { opacity: 0.4; }
-    .hero-scroll-hint {
-      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-      color: rgba(255,255,255,0.4); font-size: 0.72rem; letter-spacing: 0.08em;
-      animation: bounce 2s ease-in-out infinite;
-    }
-    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
 
     /* ── SECTION ── */
     .section {
@@ -161,28 +136,12 @@
       margin-bottom: 1.8rem;
     }
 
-    /* ── RESEARCH ── */
-    .research-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.2rem;
+    /* ── ABOUT ── */
+    .about-text {
+      font-size: 0.92rem; color: var(--muted);
+      line-height: 1.9; max-width: 700px;
     }
-    .research-card {
-      padding: 1.6rem; border: 1px solid var(--border);
-      border-radius: 14px; transition: all 0.2s;
-    }
-    .research-card:hover {
-      border-color: #93c5fd;
-      box-shadow: 0 4px 20px rgba(37,99,235,0.08);
-      transform: translateY(-2px);
-    }
-    .research-icon {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: var(--accent-light);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; margin-bottom: 1rem;
-    }
-    .research-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .research-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+    .about-text strong { color: var(--text); font-weight: 600; }
 
     /* ── PUBLICATIONS ── */
     .pub-list { display: flex; flex-direction: column; gap: 1.6rem; }
@@ -205,53 +164,11 @@
     .pub-link {
       font-size: 0.75rem; font-weight: 500; color: var(--accent);
       text-decoration: none; padding: 0.2rem 0.6rem;
-      border: 1px solid #bfdbfe; border-radius: 5px;
+      border: 1px solid var(--accent-border); border-radius: 5px;
       transition: all 0.15s;
     }
     .pub-link:hover { background: var(--accent-light); }
     .pub-note { font-size: 0.78rem; color: var(--muted); font-style: italic; margin-top: 0.5rem; }
-
-    /* ── CONFERENCES ── */
-    .conf-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 1rem;
-    }
-    .conf-card {
-      border: 1px solid var(--border); border-radius: 14px;
-      padding: 1.4rem 1rem 1.2rem;
-      text-align: center; transition: all 0.2s;
-      position: relative; overflow: hidden;
-    }
-    .conf-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-    .conf-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-    }
-    .conf-card.chi::before   { background: linear-gradient(90deg, #7c3aed, #a855f7); }
-    .conf-card.uist::before  { background: linear-gradient(90deg, #2563eb, #3b82f6); }
-    .conf-card.khci::before  { background: linear-gradient(90deg, #dc2626, #f87171); }
-    .conf-card.haptics::before { background: linear-gradient(90deg, #d97706, #fbbf24); }
-
-    .conf-abbr {
-      font-size: 1.3rem; font-weight: 900;
-      letter-spacing: -0.02em; line-height: 1; margin-bottom: 0.4rem;
-    }
-    .conf-card.chi   .conf-abbr { color: #7c3aed; }
-    .conf-card.uist  .conf-abbr { color: #2563eb; }
-    .conf-card.khci  .conf-abbr { color: #dc2626; }
-    .conf-card.haptics .conf-abbr { color: #d97706; }
-
-    .conf-full { font-size: 0.68rem; color: var(--muted); line-height: 1.4; margin-bottom: 0.6rem; }
-    .conf-years { display: flex; gap: 0.3rem; justify-content: center; flex-wrap: wrap; }
-    .conf-year {
-      font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.5rem;
-      border-radius: 999px;
-    }
-    .conf-card.chi   .conf-year { background: #f3e8ff; color: #7c3aed; }
-    .conf-card.uist  .conf-year { background: #eff6ff; color: #2563eb; }
-    .conf-card.khci  .conf-year { background: #fef2f2; color: #dc2626; }
-    .conf-card.haptics .conf-year { background: #fffbeb; color: #d97706; }
 
     /* ── EXPERIENCE ── */
     .exp-list { display: flex; flex-direction: column; }
@@ -285,15 +202,14 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      .hero-content { grid-template-columns: 1fr; gap: 2rem; }
-      .hero-photo { width: 100px; height: 100px; order: -1; }
+      .hero-banner { padding: 6.5rem 1.5rem 3rem; }
+      .hero-content { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
+      .hero-photo { width: 96px; height: 96px; order: -1; margin: 0 auto; }
+      .hero-links { justify-content: center; }
       .nav-links { display: none; }
       .pub-item { grid-template-columns: 1fr; gap: 0.3rem; }
       .pub-year { display: inline; margin-right: 0.5rem; }
       .exp-item { grid-template-columns: 1fr; gap: 0.3rem; }
-    }
-    @media (max-width: 768px) {
-      .hero-banner { background-attachment: scroll; }
     }
   </style>
 </head>
@@ -303,10 +219,9 @@
 <nav>
   <a class="nav-name" href="#">Kim Hyun Uk</a>
   <ul class="nav-links">
-    <li><a href="#research">Research</a></li>
-    <li><a href="#publications">Publications</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="#conferences">Conferences</a></li>
+    <li><a href="#publications">Publications</a></li>
     <li><a href="#funding">Funding</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -314,21 +229,14 @@
 
 <!-- ── HERO ── -->
 <div class="hero-banner">
-  <div class="hero-overlay"></div>
   <div class="hero-content">
     <div>
       <div class="hero-tag">PhD Student · POSTECH CSE</div>
       <h1>Kim Hyun Uk <span class="ko">김현욱</span></h1>
       <div class="hero-role">
-        PhD Candidate, <strong>Department of Computer Science and Engineering</strong><br/>
-        Pohang University of Science and Technology (POSTECH)
+        PhD Candidate, <strong>Computer Science and Engineering</strong>, POSTECH<br/>
+        Human-Computer Interaction (HCI) · Haptics
       </div>
-      <p class="hero-bio">
-        I am a first-year PhD student at POSTECH CSE, where I previously completed my Master's degree.
-        My research lies at the intersection of <strong style="color:rgba(255,255,255,0.8)">Human-Computer Interaction (HCI)</strong> and
-        <strong style="color:rgba(255,255,255,0.8)">Haptics</strong>, exploring how people perceive, interact with, and are empowered
-        by technology through the sense of touch.
-      </p>
       <div class="hero-links">
         <a href="mailto:vldrjrmtxkdlf@postech.ac.kr" class="hero-link primary">✉ Email</a>
         <a href="https://github.com/Hyunuk22" class="hero-link outline" target="_blank">GitHub</a>
@@ -339,104 +247,34 @@
       <img src="IMG/photo.jpg" alt="Kim Hyun Uk"
         onerror="this.style.display='none'; this.parentElement.querySelector('.photo-placeholder').style.display='flex';" />
       <div class="photo-placeholder">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5">
           <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
         </svg>
         <span>Photo</span>
       </div>
     </div>
   </div>
-  <div class="hero-scroll-hint">
-    <span>SCROLL</span>
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
-    </svg>
-  </div>
 </div>
 
-<!-- ── RESEARCH ── -->
-<div id="research"></div>
+<!-- ── ABOUT (draft — replace with final bio) ── -->
+<div id="about"></div>
 <div class="section slide-up">
-  <div class="section-label">Research Interests</div>
-  <div class="research-grid">
-    <div class="research-card">
-      <div class="research-icon">🖐</div>
-      <div class="research-title">Haptics</div>
-      <div class="research-desc">
-        Investigating tactile and force feedback to create natural, immersive
-        experiences in virtual and physical environments.
-      </div>
-    </div>
-    <div class="research-card">
-      <div class="research-icon">🧑‍💻</div>
-      <div class="research-title">Human-Computer Interaction</div>
-      <div class="research-desc">
-        Designing and evaluating novel interaction techniques that bridge the
-        gap between humans and computing systems.
-      </div>
-    </div>
-    <div class="research-card">
-      <div class="research-icon">🥽</div>
-      <div class="research-title">Extended Reality (XR)</div>
-      <div class="research-desc">
-        Exploring multimodal feedback in AR/VR to enhance presence, usability,
-        and accessibility of immersive experiences.
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ── PUBLICATIONS ── -->
-<div id="publications"></div>
-<div class="section">
-  <div class="section-label">Publications</div>
-  <div class="pub-list">
-
-    <div class="pub-item">
-      <div class="pub-year">2026</div>
-      <div>
-        <div class="pub-venue">IEEE VR 2026</div>
-        <div class="pub-title">Gaze-Adaptive Semantic Cinematic Haptic Effect Generation</div>
-        <div class="pub-authors"><strong>Hyunuk Kim</strong> et al.</div>
-        <div style="font-size:0.75rem; color:#6b7280; font-style:italic; margin-top:0.3rem;">Under Preparation</div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-year">2026</div>
-      <div>
-        <div class="pub-venue">IEEE Trans. Haptics</div>
-        <div class="pub-title">Evaluating Normal-Hearing Haptic Systems with Deaf and Hard-of-Hearing Users</div>
-        <div class="pub-authors"><strong>Hyunuk Kim</strong> et al.</div>
-        <div style="font-size:0.75rem; color:#6b7280; font-style:italic; margin-top:0.3rem;">Under Preparation</div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-year">2023</div>
-      <div>
-        <div class="pub-venue">KSC 2023</div>
-        <div class="pub-title">Deep Learning-based Road Image Recognition in APACHE5 NPU SoC Environment</div>
-        <div class="pub-authors">Seonghwa Han, <strong>Hyunuk Kim</strong>, Gihyeon Na, Injung Kim</div>
-        <div class="pub-links">
-          <a class="pub-link" href="#">PDF</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pub-item">
-      <div class="pub-year">2025</div>
-      <div>
-        <div class="pub-venue">World Haptics Conference 2025</div>
-        <div class="pub-title">Enhancing Body-Penetrating Phantom Sensations Through Multisensory Integration of Sound and Vibration</div>
-        <div class="pub-authors"><strong>Hyunuk Kim</strong>, Dajin Lee, Seungmoon Choi</div>
-        <div class="pub-links">
-          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/11123325" target="_blank">IEEE</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
+  <div class="section-label">About</div>
+  <p class="about-text">
+    I am a PhD candidate in the <strong>Department of Computer Science and Engineering</strong> at POSTECH,
+    advised by Prof. Seungmoon Choi in the POSTECH Interaction Laboratory (POINT). My research sits at the
+    intersection of <strong>Human-Computer Interaction (HCI)</strong> and <strong>Haptics</strong>, with a focus
+    on generating and evaluating multisensory haptic feedback from audiovisual content — from real-time
+    sound-to-haptic rendering for in-vehicle 4D cinema and VR to full-body haptic effects for immersive
+    gaming and the metaverse.
+  </p>
+  <p class="about-text" style="margin-top: 1.1rem;">
+    I'm especially drawn to questions of perception and accessibility: how touch can substitute for or
+    enrich other senses, and how haptic systems can be designed for users who are deaf or hard of hearing.
+    I enjoy working across the full stack of a haptic system — from signal processing and hardware to
+    conducting user studies — and I'm motivated by building technology that makes immersive experiences
+    more expressive and inclusive for everyone.
+  </p>
 </div>
 
 <!-- ── EXPERIENCE ── -->
@@ -474,43 +312,84 @@
   </div>
 </div>
 
-<!-- ── CONFERENCES ── -->
-<div id="conferences"></div>
+<!-- ── PUBLICATIONS ── -->
+<div id="publications"></div>
 <div class="section">
-  <div class="section-label">Conference Participation</div>
-  <div class="conf-grid">
+  <div class="section-label">Publications</div>
+  <div class="pub-list">
 
-    <div class="conf-card chi">
-      <div class="conf-abbr">CHI</div>
-      <div class="conf-full">ACM Conference on Human Factors in Computing Systems</div>
-      <div class="conf-years">
-        <span class="conf-year">2025</span>
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-venue">UIST 2026</div>
+        <div class="pub-title">CineHaptic: Context-Aware Real-Time Audiovisual-to-Haptic Rendering System for In-Vehicle 4D Cinematic Experiences</div>
+        <div class="pub-authors">Junwoo Kim, <strong>Hyunuk Kim</strong>, Hyun-Bin Oh, Jeonggoo Kang, Tae-Hyun Oh, Seungmoon Choi</div>
+        <div class="pub-note">Acceptance rate 20.1%</div>
       </div>
     </div>
 
-    <div class="conf-card uist">
-      <div class="conf-abbr">UIST</div>
-      <div class="conf-full">ACM Symposium on User Interface Software and Technology</div>
-      <div class="conf-years">
-        <span class="conf-year">2025</span>
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-venue">IEEE Trans. Haptics</div>
+        <div class="pub-title">Evaluating Sound-Driven Haptic Systems with Deaf and Hard-of-Hearing Users</div>
+        <div class="pub-authors">Heeji Sohn, <strong>Hyunuk Kim</strong>, Jiwan Lee, Dajin Lee, Seungmoon Choi</div>
+        <div class="pub-note">Under Preparation</div>
       </div>
     </div>
 
-    <div class="conf-card khci">
-      <div class="conf-abbr">KHCI</div>
-      <div class="conf-full">Korean Conference on Human-Computer Interaction</div>
-      <div class="conf-years">
-        <span class="conf-year">2024</span>
-        <span class="conf-year">2025</span>
+    <div class="pub-item">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-venue">4th Korea Haptics Conference</div>
+        <div class="pub-title">진동 피드백 위치가 영화 감상 경험에 미치는 영향: 햅틱 의자와 햅틱 안경 비교</div>
+        <div class="pub-authors"><strong>김현욱</strong>, 권두홍, 박현용, 최승문</div>
+        <div class="pub-note">Demo · Poster Presentation</div>
       </div>
     </div>
 
-    <div class="conf-card haptics">
-      <div class="conf-abbr">KHS</div>
-      <div class="conf-full">Korea Haptics Society Annual Conference</div>
-      <div class="conf-years">
-        <span class="conf-year">2024</span>
-        <span class="conf-year">2025</span>
+    <div class="pub-item">
+      <div class="pub-year">2025</div>
+      <div>
+        <div class="pub-venue">IEEE World Haptics Conference 2025</div>
+        <div class="pub-title">Enhancing Body-Penetrating Phantom Sensations Through Multisensory Integration of Sound and Vibration</div>
+        <div class="pub-authors"><strong>Hyunuk Kim</strong>, Dajin Lee, Seungmoon Choi</div>
+        <div class="pub-note">July 8–11, 2025 · Long Paper</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2025</div>
+      <div>
+        <div class="pub-venue">IEEE World Haptics Conference 2025</div>
+        <div class="pub-title">Body-Penetrating Tactile Phantom Sensations Enhanced by Sound</div>
+        <div class="pub-authors"><strong>Hyunuk Kim</strong>, Dajin Lee, Seungmoon Choi</div>
+        <div class="pub-note">pp. 870, July 8–11, 2025 · Hands-on Demonstration</div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://ieeexplore.ieee.org/abstract/document/11123325" target="_blank">IEEE</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-venue">Korea Haptics Conference 2024</div>
+        <div class="pub-title">Generating Real-Time, Semantic, Sound-based, Full-Body Haptic Effects for Virtual Reality First-Person Shooter Games</div>
+        <div class="pub-authors">Gyeore Yun, <strong>Hyunuk Kim</strong>, Seungmoon Choi · Aug 19–21, 2024</div>
+        <div class="pub-note">윤겨레, 김현욱, 최승문, "가상현실 일인칭 슈팅 게임을 위한 실시간 의미론적 소리 기반 전신 헵틱 효과 생성," 한국 햅틱스 학술대회, 8.19–21, 2024.</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-venue">KSC 2023</div>
+        <div class="pub-title">Deep Learning-based Road Image Recognition in APACHE5 NPU SoC Environment</div>
+        <div class="pub-authors">Seonghwa Han, <strong>Hyunuk Kim</strong>, Gihyeon Na, Injung Kim</div>
+        <div class="pub-links">
+          <a class="pub-link" href="#">PDF</a>
+        </div>
       </div>
     </div>
 
@@ -520,8 +399,16 @@
 <!-- ── FUNDING ── -->
 <div id="funding"></div>
 <div class="section">
-  <div class="section-label">Funding</div>
+  <div class="section-label">Participation in Funded Research Projects</div>
   <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-period">2026.09 –<br/>2029.09</div>
+      <div>
+        <div class="exp-role">Context-Aware Hybrid Haptic Effect Generation from Audiovisual Sources Through Multimodal Learning</div>
+        <div class="exp-where">다중모달 학습 기반 시청각 자료에 대한 맥락 인지 복합 햅틱 효과 생성</div>
+      </div>
+    </div>
 
     <div class="exp-item">
       <div class="exp-period">2024.09 –<br/>2025.09</div>
@@ -529,6 +416,23 @@
         <div class="exp-role">Visual/Audio Based Real-Time Haptic Effects Generation For Cinematic Effect Enhancement</div>
         <div class="exp-where">시네마틱 효과 개선을 위한 소리-영상 기반 실시간 햅틱 효과 생성 연구</div>
         <div class="exp-desc">₩12,000,000 · 1-Year Research Grant</div>
+        <div class="exp-desc" style="color: var(--accent); font-weight: 600; margin-top: 0.3rem;">개인 연구자로서 국가(한국연구재단)로부터 독자적으로 수주한 과제 · Independently awarded by the National Research Foundation of Korea (NRF)</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">2024.06 –<br/>2025.06</div>
+      <div>
+        <div class="exp-role">Vibration Seat-Based Haptic Feedback Algorithm for Enhancing In-Vehicle Video Content Immersion</div>
+        <div class="exp-where">현대자동차 산학과제 · 차량내 영상컨텐츠 몰입감 향상을 위한 진동 시트 기반 햅틱 피드백 알고리즘 개발</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">2024.02 –<br/>2026.02</div>
+      <div>
+        <div class="exp-role">Semantic Sound-to-Haptic Automatic Conversion: Metaverse, Full-Body Haptic Effects, and Accessibility</div>
+        <div class="exp-where">Mid-Career Researcher Program, National Research Foundation of Korea (NRF)</div>
       </div>
     </div>
 
