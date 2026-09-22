@@ -49,9 +49,10 @@
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       text-decoration: none; font-size: 0.85rem; font-weight: 500;
-      transition: color 0.2s; color: var(--muted);
+      transition: color 0.2s; color: var(--muted); white-space: nowrap;
     }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); font-weight: 700; }
 
     /* ── HERO ── */
     .hero-banner {
@@ -121,15 +122,19 @@
     /* ── SECTION ── */
     .section {
       max-width: 860px; margin: 0 auto;
-      padding: 4rem 2rem;
+      padding: 3rem 2rem 4rem;
       border-top: 1px solid var(--border);
     }
-    /* slide-up on scroll */
-    .slide-up {
-      opacity: 0; transform: translateY(40px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+    /* ── TAB PANELS ── */
+    .tab-panel { display: none; }
+    .tab-panel.active {
+      display: block;
+      animation: panelIn 0.3s ease;
     }
-    .slide-up.visible { opacity: 1; transform: translateY(0); }
+    @keyframes panelIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .section-label {
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--accent);
@@ -206,7 +211,13 @@
       .hero-content { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
       .hero-photo { width: 140px; height: 140px; order: -1; margin: 0 auto; }
       .hero-links { justify-content: center; }
-      .nav-links { display: none; }
+      nav { padding: 0 1rem; }
+      .nav-name { display: none; }
+      .nav-links {
+        gap: 1.1rem; overflow-x: auto; width: 100%;
+        -ms-overflow-style: none; scrollbar-width: none;
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
       .pub-item { grid-template-columns: 1fr; gap: 0.3rem; }
       .pub-year { display: inline; margin-right: 0.5rem; }
       .exp-item { grid-template-columns: 1fr; gap: 0.3rem; }
@@ -219,7 +230,7 @@
 <nav>
   <a class="nav-name" href="#">Kim Hyun Uk</a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
+    <li><a href="#about" class="active">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#publications">Publications</a></li>
     <li><a href="#funding">Funding</a></li>
@@ -257,8 +268,7 @@
 </div>
 
 <!-- ── ABOUT (draft — replace with final bio) ── -->
-<div id="about"></div>
-<div class="section slide-up">
+<div class="section tab-panel active" id="about">
   <div class="section-label">About</div>
   <p class="about-text">
     I am a PhD candidate in the <strong>Department of Computer Science and Engineering</strong> at POSTECH,
@@ -278,8 +288,7 @@
 </div>
 
 <!-- ── EXPERIENCE ── -->
-<div id="experience"></div>
-<div class="section">
+<div class="section tab-panel" id="experience">
   <div class="section-label">Education</div>
   <div class="exp-list">
 
@@ -313,8 +322,7 @@
 </div>
 
 <!-- ── PUBLICATIONS ── -->
-<div id="publications"></div>
-<div class="section">
+<div class="section tab-panel" id="publications">
   <div class="section-label">Publications</div>
   <div class="pub-list">
 
@@ -397,8 +405,7 @@
 </div>
 
 <!-- ── FUNDING ── -->
-<div id="funding"></div>
-<div class="section">
+<div class="section tab-panel" id="funding">
   <div class="section-label">Participation in Funded Research Projects</div>
   <div class="exp-list">
 
@@ -440,8 +447,7 @@
 </div>
 
 <!-- ── CONTACT ── -->
-<div id="contact"></div>
-<div class="section">
+<div class="section tab-panel" id="contact">
   <div class="section-label">Contact</div>
   <div class="contact-grid">
     <div class="contact-item">
@@ -470,18 +476,39 @@
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  // ── Slide-up on scroll ──
-  const slideEls = document.querySelectorAll('.slide-up');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        e.target.style.transitionDelay = `${i * 0.05}s`;
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
+  // ── Click-to-switch tabs (no more long scrolling) ──
+  const panels = document.querySelectorAll('.tab-panel');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  function showTab(id) {
+    let matched = false;
+    panels.forEach(p => {
+      const isMatch = p.id === id;
+      p.classList.toggle('active', isMatch);
+      if (isMatch) matched = true;
     });
-  }, { threshold: 0.1 });
-  slideEls.forEach(el => io.observe(el));
+    if (!matched) return;
+    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    history.replaceState(null, '', '#' + id);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const id = link.getAttribute('href').slice(1);
+    if (id && document.getElementById(id)?.classList.contains('tab-panel')) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        showTab(id);
+      });
+    }
+  });
+
+  document.querySelector('.nav-name').addEventListener('click', (e) => {
+    e.preventDefault();
+    showTab('about');
+  });
+
+  if (location.hash) showTab(location.hash.slice(1));
 </script>
 
 </body>
